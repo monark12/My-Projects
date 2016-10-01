@@ -97,7 +97,7 @@ def getFeatures(token, index, tokens):
 
 def singularize(word):
     """
-    A poor replacement for the pattern.en singularize function, but ok for now.
+    A poor replacement for the  pattern.en singularize function, but ok for now.
     """
 
     units = {
