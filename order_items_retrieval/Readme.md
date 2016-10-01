@@ -10,14 +10,14 @@ Suppose a person enters the following text(i.e he wants)
 2 1/4 cups all-purpose flour.
 
 We have to extract the informations about what the person wants and how much in a particulat format.
+
 [
-  'input': '2$1/4 cups all-purpose flour.',
+'name': 'all-purpose flour',
+
+'qty': '2$1/4',
+
+'unit': 'cup'
   
-  'name': 'all-purpose flour',
-  
-  'qty': '2$1/4',
-  
-  'unit': 'cup'
 ]
 
 For this we are using Python-crfsuite module to create and train our model.  
