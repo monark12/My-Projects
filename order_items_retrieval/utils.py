@@ -5,7 +5,7 @@ import string
 
 def tokenize(s):
     """
-    Tokenize on parenthesis, punctuation, spaces and American units followed by a slash.
+    Tokenize on parenthesis , punctuation, spaces and American units followed by a slash.
 
     We sometimes give American units and metric units for baking recipes. For example:
         * 2 tablespoons/30 mililiters milk or cream
