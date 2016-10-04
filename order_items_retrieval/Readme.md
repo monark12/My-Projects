@@ -1,6 +1,6 @@
 # The Project Is an example of 'Text Mining'.
 # Text mining, also referred to as text data mining, roughly equivalent to text analytics, refers to the process of deriving high-quality information from text
-# This contains the reimplementaion of the of the NYT's ingredient phrase tagger in full python.
+
 The problem is to extracts item name, quantity, unit and special comments from a sentence of orders.
 The data we used is of NYTimes tagged by human news assistants
 
