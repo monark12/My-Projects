@@ -1,10 +1,16 @@
 import pandas as pd
 import cv2
 import numpy as np
-'''import keras'''
 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+
+from keras.utils.np_utils import to_categorical
+from keras.models import Sequential
+from keras.layers import Dense, Dropout, Activation, Flatten
+from keras.layers import Convolution2D, MaxPooling2D, LSTM
+from keras.optimizers import SGD, Adam
+from keras.regularizers import l2
 
 np.random.seed(7)
 
@@ -29,15 +35,11 @@ images_train = np.multiply(images_train, 1.0/255.0)
 images_test = np.multiply(images_test, 1.0/255.0)
 
 train_labels_flat = data_train[[0]].values.ravel()
-# test_labels_flat = data_test[[0]].values.ravel()
 
 train_labels_count = np.unique(train_labels_flat).shape[0]
-# test_labels_count = np.unique(test_labels_flat).shape[0]
-
-from keras.utils.np_utils import to_categorical
 
 train_labels = to_categorical(np.asarray(train_labels_flat))
-# test_labels = to_categorical(np.asarray(test_labels_flat))
+
 train_labels = train_labels.astype(np.uint8)
 
 images_train = images_train.reshape(images_train.shape[0],28,28)
@@ -49,13 +51,6 @@ width = 28
 images_train = images_train.reshape(images_train.shape[0], 1, height, width).astype('float32')
 images_test = images_test.reshape(images_test.shape[0], 1, height, width).astype('float32')
 
-
-
-from keras.models import Sequential
-from keras.layers import Dense, Dropout, Activation, Flatten
-from keras.layers import Convolution2D, MaxPooling2D, LSTM
-from keras.optimizers import SGD, Adam
-from keras.regularizers import l2
 
 model = Sequential()
 
@@ -76,15 +71,12 @@ model.add(Dense(10, activation='softmax'))
 # print(model.summary())
 
 
-
 adam = Adam(lr = 0.01 , decay = 10**-4)
 model.compile(loss = 'categorical_crossentropy', optimizer = adam,
 				metrics=['accuracy'])
 
 
-# model.load_weights('more_accurate.h5')
 model.fit(images_train, train_labels, batch_size = 128 , nb_epoch = 10)
-# model.fit(images_train, train_labels, batch_size = 128, nb_epoch = 10)
 model.save('generator_model.h5')
 
 prediction = model.predict_classes(images_test)
@@ -96,10 +88,3 @@ with open("submit.csv","w", newline="") as out:
     spamwriter.writerow(['ImageId','Label'])
     for i in range(len(images_test)):
         spamwriter.writerow([i+1,prediction[i]])
-
-# import csv
-# from itertools import izip
-
-# with open('submission.csv', 'wb') as f:
-#     writer = csv.writer(f)
-#     writer.writerows(izip([i for i in range(len)], frequencies))
